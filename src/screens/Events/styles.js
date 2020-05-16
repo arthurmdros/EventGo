@@ -8,8 +8,20 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
 
-    text: {
+    Text: {
       fontSize: 16,
-      color: '#FFF',
+      color: '#fff',
     },
+
+    TouchableOpacity: {
+      flexDirection: 'row',
+      backgroundColor: '#FFF',
+      marginTop: 30,
+    },
+
+    TextButton: {
+      fontSize: 16,
+      fontWeight: "bold",
+      color: '#1393f6',
+    }
   })
