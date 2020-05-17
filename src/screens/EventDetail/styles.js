@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import Constants from 'expo-constants';
 
 export default StyleSheet.create({    
     View: {
@@ -6,6 +7,7 @@ export default StyleSheet.create({
         backgroundColor: '#1393f6',
         alignItems: 'center',
         justifyContent: 'center',
+        paddingTop: Constants.statusBarHeight + 20,
     },
 
     Text: {
@@ -15,7 +17,6 @@ export default StyleSheet.create({
 
     TouchableOpacity: {
       flexDirection: 'row',
-      backgroundColor: '#FFF',
       marginTop: 30,
     },
 
@@ -23,5 +24,26 @@ export default StyleSheet.create({
       fontSize: 16,
       fontWeight: "bold",
       color: '#1393f6',
-    }
+    },
+
+    item: {
+      padding: 24,
+      borderRadius: 8,
+      backgroundColor: '#41414d',
+      marginBottom: 16,
+      marginTop: 48,
+    },
+
+    itemProperty:{
+        fontSize: 14,
+        color: '#FFF',
+        fontWeight: 'bold',
+        marginTop: 24,
+    },
+
+    itemValue: {
+        marginTop: 8,
+        fontSize: 15,        
+        color: '#FFF',
+    },
   })
