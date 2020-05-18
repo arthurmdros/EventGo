@@ -1,53 +1,76 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 
-export default StyleSheet.create({    
-    View: {
+export default StyleSheet.create({
+    eventsContainer: {
         flex: 1,
-        backgroundColor: '#1393f6',
-        alignItems: 'center',
-        justifyContent: 'center',
+        paddingHorizontal: 24,
         paddingTop: Constants.statusBarHeight + 20,
+        backgroundColor: '#1393f6',
     },
 
-    Text: {
-      fontSize: 16,
-      color: '#fff',
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
 
-    TouchableOpacity: {
-      flexDirection: 'row',
-      marginTop: 10,
+    headerText: {
+        fontSize: 15,
+        color: '#FFF',
     },
 
-    TextButton: {
-      fontSize: 16,
-      fontWeight: "bold",
-      color: '#1393f6',      
+    headerTextBold: {
+        fontWeight: 'bold',
     },
 
-    FlatList:{
-      marginTop: 30,
-      paddingHorizontal: 20,
+    title: {
+        fontSize: 20,
+        marginBottom: 16,
+        marginTop: 40,
+        color: '#FFF',
+        fontWeight: 'bold',
     },
 
-    item:{
-      padding: 24,
-      borderRadius: 8,
-      backgroundColor: '#41414d',
-      marginBottom: 16,
+    description: {
+        fontSize: 16,
+        lineHeight: 24,
+        color: '#FFF',
+    },
+    
+    eventList: {
+        marginTop: 32,
     },
 
-    itemProperty:{
-      fontSize: 14,
-      color: '#FFF',
-      fontWeight: 'bold',
+    event: {
+        padding: 24,
+        borderRadius: 8,
+        backgroundColor: '#FFF',
+        marginBottom: 16,
     },
 
-    itemValue:{
-      marginTop: 8,
-      fontSize: 15,
-      marginBottom: 24,
-      color: '#FFF',
+    eventProperty:{
+        fontSize: 14,
+        color: '#41414d',
+        fontWeight: 'bold',
     },
-  })
+
+    eventValue: {
+        marginTop: 8,
+        fontSize: 15,
+        marginBottom: 24,
+        color: '#737380',
+    },
+    
+    detailsButton: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+
+    detailsButtonText: {
+        color: '#1393f6',
+        fontSize: 15,
+        fontWeight: 'bold',
+    },
+})
