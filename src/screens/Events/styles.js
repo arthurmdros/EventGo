@@ -27,7 +27,7 @@ export default StyleSheet.create({
     title: {
         fontSize: 20,
         marginBottom: 16,
-        marginTop: 40,
+        marginTop: 20,
         color: '#FFF',
         fontWeight: 'bold',
     },
@@ -45,13 +45,13 @@ export default StyleSheet.create({
     event: {
         padding: 24,
         borderRadius: 8,
-        backgroundColor: '#FFF',
+        backgroundColor: '#41414d',
         marginBottom: 16,
     },
 
     eventProperty:{
         fontSize: 14,
-        color: '#41414d',
+        color: '#1393f6',
         fontWeight: 'bold',
     },
 
@@ -59,7 +59,7 @@ export default StyleSheet.create({
         marginTop: 8,
         fontSize: 15,
         marginBottom: 24,
-        color: '#737380',
+        color: '#FFF',
     },
     
     detailsButton: {
