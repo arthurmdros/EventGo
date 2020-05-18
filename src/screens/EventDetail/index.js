@@ -1,40 +1,64 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
-import {View, Text, TouchableOpacity} from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { Feather } from '@expo/vector-icons';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 
+import logoImg from '../../assets/logo.png';
 import styles from './styles';
 
 export default function EventDetail(){
     const navigation = useNavigation();
+    const route = useRoute();
+
+    const event = route.params.event;
 
     return(
-        <View style={styles.View}>
-            <Text style={styles.Text}>Event Detail</Text>
-            <View style={styles.item}>
-                <Text style={[styles.itemProperty, {marginTop: 0}]}>Evento:</Text>
-                <Text style={styles.itemValue}>Evento N°</Text>
+        <View style={styles.datailContainer}>
+            <View style={styles.header}>
+                <Image source={logoImg}/>
 
-                <Text style={styles.itemProperty}>Descrição:</Text>
-                <Text style={styles.itemValue}>Evento criado com tal objetivo</Text>
+                <TouchableOpacity style={styles.headerAction} onPress={() => navigation.navigate('Events')}>
+                    <Feather name="arrow-left" size={28} color="#FFF" />
+                    <Text style={styles.headerActionText}>Home</Text>
+                </TouchableOpacity>
+            </View>
 
-                <Text style={styles.itemProperty}>Começa dia:</Text>
-                <Text style={styles.itemValue}>00/00/0000</Text>
+            <View style={styles.event}>
+                <Text style={[styles.eventProperty, {marginTop: 0}]}>Evento:</Text>
+                <Text style={styles.eventValue}>{event.title}</Text>
 
-                <Text style={styles.itemProperty}>Termina dia:</Text>
-                <Text style={styles.itemValue}>00/00/0000</Text>
+                <Text style={styles.eventProperty}>Descrição:</Text>
+                <Text style={styles.eventValue}>{event.description}</Text>
 
-                <Text style={styles.itemProperty}>Começa às:</Text>
-                <Text style={styles.itemValue}>00:00</Text>
+                <Text style={styles.eventProperty}>Tipo de evento:</Text>
+                <Text style={styles.eventValue}>{event.selectedValue}</Text>
 
-                <Text style={styles.itemProperty}>Termina às:</Text>
-                <Text style={styles.itemValue}>00:00</Text>
+                <View style={styles.dateProperty}>
+                    <Text style={styles.eventProperty}>Começa dia:</Text>
+                    <Text style={styles.eventProperty}>Termina dia:</Text>
+                </View>
+                
+                <View style={styles.dateValue}>                    
+                    <Text style={styles.eventValue}>{event.selectedStartDate}</Text>                                        
+                    <Text style={styles.eventValue}>{event.selectedEndDate}</Text>
+                </View>
+
+                <View style={styles.scheduleProperty}>
+                    <Text style={styles.eventProperty}>Começa às:</Text>
+                    <Text style={styles.eventProperty}>Termina às:</Text>
+                </View>
+
+                <View style={styles.scheduleValue}>
+                    <Text style={styles.eventValue}>{event.selectedStartTime}</Text>
+                    <Text style={styles.eventValue}>{event.selectedEndTime}</Text>
+                </View>                                
             
-            <TouchableOpacity
-            style={styles.TouchableOpacity}
-            onPress={()=> navigation.navigate('Ticket')}
-            >
-                <Text style={styles.TextButton}>Ticket</Text>
-            </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.action}
+                    onPress={()=> navigation.navigate('Ticket')}
+                >
+                    <Text style={styles.actionText}>Adquirir ingresso</Text>
+                </TouchableOpacity>
 
             </View>
         </View>
