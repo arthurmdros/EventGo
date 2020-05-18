@@ -55,9 +55,9 @@ export default function EventDetail(){
             
                 <TouchableOpacity
                     style={styles.action}
-                    onPress={()=> navigation.navigate('Ticket')}
+                    onPress={()=> navigation.navigate('Ticket', {event})}
                 >
-                    <Text style={styles.actionText}>Adquirir ingresso</Text>
+                    <Text style={styles.actionText}>Ingressos</Text>
                 </TouchableOpacity>
 
             </View>
