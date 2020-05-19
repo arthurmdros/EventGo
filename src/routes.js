@@ -7,7 +7,7 @@ const AppStack = createStackNavigator();
 import Events from './screens/Events';
 import EventDetail from './screens/EventDetail';
 import Ticket from './screens/Ticket';
-import ConfirmTicket from './screens/ConfirmTicket';
+import BuyTicket from './screens/BuyTicket';
 
 export default function Routes(){
     return(
@@ -16,7 +16,7 @@ export default function Routes(){
                 <AppStack.Screen name="Events" component={Events}/>
                 <AppStack.Screen name="EventDetail" component={EventDetail}/>
                 <AppStack.Screen name="Ticket" component={Ticket}/>
-                <AppStack.Screen name="ConfirmTicket" component={ConfirmTicket}/>
+                <AppStack.Screen name="BuyTicket" component={BuyTicket}/>
             </AppStack.Navigator>
         </NavigationContainer>
     );
