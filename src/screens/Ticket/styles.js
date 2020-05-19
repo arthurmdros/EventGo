@@ -1,49 +1,82 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 
-export default StyleSheet.create({    
-    View: {
+
+export default StyleSheet.create({
+    ticketContainer: {
         flex: 1,
-        backgroundColor: '#1393f6',
-        alignItems: 'center',
-        justifyContent: 'center',
+        paddingHorizontal: 24,
         paddingTop: Constants.statusBarHeight + 20,
+        backgroundColor: '#1393f6',
     },
 
-    Text: {
-      fontSize: 16,
-      color: '#fff',
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
 
-    TouchableOpacity: {
+    headerAction: {
       flexDirection: 'row',
-      marginTop: 30,
+      justifyContent: 'space-between',
+      alignItems: 'center',
     },
 
-    TextButton: {
-      fontSize: 16,
-      fontWeight: "bold",
-      color: '#1393f6',
+    headerActionText: {
+      color: '#FFF',
+      fontSize: 16, 
+      fontWeight: 'bold',
     },
 
-    item: {
-      padding: 24,
-      borderRadius: 8,
-      backgroundColor: '#41414d',
+    title: {
+      fontSize: 20,
       marginBottom: 16,
-      marginTop: 48,
+      marginTop: 40,
+      color: '#FFF',
+      fontWeight: 'bold',
+    },
+    
+    ticketList: {
+      marginTop: 20,
+      marginLeft: 30,      
     },
 
-    itemProperty:{
+    ticket: {
+        padding: 24,
+        width: '90%',
+        borderRadius: 8,
+        backgroundColor: '#41414d',
+        marginBottom: 16,        
+    },
+
+    ticketProperty:{
         fontSize: 14,
-        color: '#FFF',
+        color: '#1393f6',
         fontWeight: 'bold',
-        marginTop: 24,
     },
 
-    itemValue: {
+    ticketValue: {
         marginTop: 8,
-        fontSize: 15,        
+        fontSize: 15,
+        marginBottom: 24,
         color: '#FFF',
+    },   
+
+    action: {
+      backgroundColor: '#FFF',
+      borderRadius: 8,
+      height: 30,
+      width: '48%',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 20,
+      marginLeft: 50,
     },
-  })
+
+    actionText: {
+        color: '#1393f6',
+        fontSize: 15,
+        fontWeight: 'bold',
+    },
+
+});
