@@ -34,8 +34,7 @@ export default StyleSheet.create({
         borderRadius: 8,
         backgroundColor: '#41414d',
         marginBottom: 16,   
-        marginLeft: 15,    
-        marginTop: 50, 
+        marginLeft: 15,            
     },
 
     infoProperty:{
