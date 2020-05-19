@@ -17,7 +17,13 @@ export default function Ticket(){
 
     useEffect(() => {
         api.get(`/ticket/event/${event_id}`).then(response => {
-            setTickets(response.data);
+            if(response.data.length === 0){
+                alert('Não há ingressos disponíveis');
+                navigation.navigate('Events');
+            }else{
+                setTickets(response.data);
+            }
+            
         })
     }, [event_id]);
 
@@ -52,7 +58,7 @@ export default function Ticket(){
 
                     <TouchableOpacity
                         style={styles.action}
-                        onPress={()=> navigation.navigate('ConfirmTicket')}
+                        onPress={()=> navigation.navigate('BuyTicket', {ticket})}
                     >
                         <Text style={styles.actionText}> Adquirir </Text>                       
                     </TouchableOpacity>                        
