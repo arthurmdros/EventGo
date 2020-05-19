@@ -32,7 +32,7 @@ export default function Events(){
         });
 
         setEvents([...events, ...response.data]);
-        setTotal(response.headers('Total-Events'));
+        setTotal(response.headers['Total-Events']);
         setPage(page + 1);
         setLoading(false);
     }
