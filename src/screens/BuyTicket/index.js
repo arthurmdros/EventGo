@@ -15,7 +15,14 @@ export default function BuyTicket(){
 
     function acquired() { 
             alert(selectedTicket.amount - parseInt(amountValue));
-            alert('Quantidade:'+amountValue+' '+'Valor:'+totalValue);     
+            alert('Quantidade:'+amountValue+' '+'Valor:'+totalValue);
+            const data = {
+                totalValue,
+                amountValue,
+                selectedTicket
+            };
+            console.log(data);
+            navigation.navigate('Payment');
         
     }
 
