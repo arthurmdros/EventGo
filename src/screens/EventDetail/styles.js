@@ -33,12 +33,12 @@ export default StyleSheet.create({
         borderRadius: 8,
         backgroundColor: '#41414d',
         marginBottom: 16,
-        marginTop: 48,
+        marginTop: 15,
     },
 
     eventProperty:{
         fontSize: 14,
-        color: '#FFF',
+        color: '#1393f6',
         fontWeight: 'bold',
         marginTop: 24,
     },
@@ -76,7 +76,7 @@ export default StyleSheet.create({
     action: {
         backgroundColor: '#FFF',
         borderRadius: 8,
-        height: 50,
+        height: 30,
         width: '48%',
         justifyContent: 'center',
         alignItems: 'center',
