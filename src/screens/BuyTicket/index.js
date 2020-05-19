@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 import { TextInput, TouchableOpacity, Image, View, Text} from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import PickerSelect from 'react-native-picker-select';
 
 import logoImg from '../../assets/logo.png';
 import styles from './styles';
@@ -12,17 +13,30 @@ export default function BuyTicket(){
     const selectedTicket = route.params.ticket;
     const [totalValue, setTotalValue] = useState(selectedTicket.value);
     const [amountValue, setAmountValue] = useState(String(1));
+    const [paymentSelected, setPaymentSelected] = useState('');
+    const paymentOptions = [
+        { label: 'Boleto', value: 'Boleto'},
+        { label: 'Cartão de Crédito', value: 'Cartão de Crédito'}
+    ]
 
     function acquired() { 
-            alert(selectedTicket.amount - parseInt(amountValue));
-            alert('Quantidade:'+amountValue+' '+'Valor:'+totalValue);
-            const data = {
+            const info = {
                 totalValue,
                 amountValue,
-                selectedTicket
+                selectedTicket,
+                paymentSelected
+
             };
-            console.log(data);
-            navigation.navigate('Payment');
+
+            if(paymentSelected === 'Boleto'){
+                navigation.navigate('Payment', {info});
+            }else if (paymentSelected === 'Cartão de Crédito'){
+                navigation.navigate('PaymentCard', {info});
+            }else{
+                alert('Uma forma de pagamento deve ser selecionada');
+                return;
+            }
+            
         
     }
 
@@ -71,6 +85,12 @@ export default function BuyTicket(){
 
                     <Text style={styles.ticketProperty}>Valor total:</Text>
                     <Text style={styles.ticketValue}>R$ {totalValue}</Text>
+
+                    <Text style={styles.ticketProperty}>Forma de pagamento:</Text>
+                    <PickerSelect      
+                        onValueChange={(value) => setPaymentSelected(value)}
+                        items={paymentOptions}
+                    />
 
                     <View style={styles.actions}>
                         <TouchableOpacity style={styles.action} onPress={acquired}>
