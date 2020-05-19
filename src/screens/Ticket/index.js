@@ -1,30 +1,64 @@
-import React from 'react';
-import {TouchableOpacity, View, Text} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { Feather } from '@expo/vector-icons';
+import { FlatList, View, Text, Image, TouchableOpacity} from 'react-native';
 
+import api from '../../services/api';
+import logoImg from '../../assets/logo.png';
 import styles from './styles';
 
 export default function Ticket(){
+    const navigation = useNavigation();
+    const route = useRoute();
+    const [tickets,setTickets] = useState([]);
+
+    const item = route.params.event;
+    const event_id = item.id;
+
+    useEffect(() => {
+        api.get(`/ticket/event/${event_id}`).then(response => {
+            setTickets(response.data);
+        })
+    }, [event_id]);
+
     return(
-        <View style={styles.View}>
-            <Text style={styles.Text}>Ticket</Text>
-            <View style={styles.item}>
-                <Text style={[styles.itemProperty, {marginTop: 0}]}>Ingresso:</Text>
-                <Text style={styles.itemValue}>Ingresso tal</Text>
+        <View style={styles.ticketContainer}>
+            <View style={styles.header}>
+                <Image source={logoImg}/>
 
-                <Text style={styles.itemProperty}>Valor:</Text>
-                <Text style={styles.itemValue}>R$ 00,00</Text>
-
-                <Text style={styles.itemProperty}>Quantidade:</Text>
-                <Text style={styles.itemValue}>1</Text>                
-            
-            <TouchableOpacity
-            style={styles.TouchableOpacity}
-            onPress={()=> alert('Ingresso adquirido, enviando para o seu e-mail')}
-            >
-                <Text style={styles.TextButton}>Buy Ticket</Text>
-            </TouchableOpacity>
-
+                <TouchableOpacity style={styles.headerAction} onPress={() => navigation.navigate('EventDetail', {item})}>
+                    <Feather name="arrow-left" size={28} color="#FFF" />
+                    <Text style={styles.headerActionText}>Retornar</Text>
+                </TouchableOpacity>
             </View>
+
+            <Text style={styles.title}>Ingressos disponíveis</Text>
+            
+            <FlatList
+                data={tickets}
+                style={styles.ticketList}
+                keyExtractor={ticket => String (ticket.id)}
+                showsVerticalScrollIndicator={false}
+                renderItem={({item: ticket}) => (
+                <View style={styles.ticket}>
+                    <Text style={[styles.ticketProperty]}>Ingresso:</Text>
+                    <Text style={styles.ticketValue}>{ticket.type}</Text>
+
+                    <Text style={styles.ticketProperty}>Valor:</Text>
+                    <Text style={styles.ticketValue}>R$ {ticket.value}</Text>
+
+                    <Text style={styles.ticketProperty}>Quantidade disponível:</Text>
+                    <Text style={styles.ticketValue}>{ticket.amount}</Text> 
+
+                    <TouchableOpacity
+                        style={styles.action}
+                        onPress={()=> navigation.navigate('ConfirmTicket')}
+                    >
+                        <Text style={styles.actionText}> Adquirir </Text>                       
+                    </TouchableOpacity>                        
+                </View>                    
+            )}
+        />            
         </View>
     );
 }
