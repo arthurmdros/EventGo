@@ -9,6 +9,7 @@ import EventDetail from './screens/EventDetail';
 import Ticket from './screens/Ticket';
 import BuyTicket from './screens/BuyTicket';
 import Payment from './screens/Payment';
+import PaymentCard from './screens/PaymentCard';
 
 export default function Routes(){
     return(
@@ -19,6 +20,7 @@ export default function Routes(){
                 <AppStack.Screen name="Ticket" component={Ticket}/>
                 <AppStack.Screen name="BuyTicket" component={BuyTicket}/>
                 <AppStack.Screen name="Payment" component={Payment}/>
+                <AppStack.Screen name="PaymentCard" component={PaymentCard}/>
             </AppStack.Navigator>
         </NavigationContainer>
     );
