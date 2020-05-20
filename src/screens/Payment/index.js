@@ -13,6 +13,7 @@ export default function Payment(){
     const formRef = useRef(null);
     const navigation = useNavigation();
     const data = route.params.info;
+    const ticket = data.selectedTicket;
   
 
     function confirmPayment(data){
@@ -23,7 +24,7 @@ export default function Payment(){
         <View style={styles.paymentContainer}>
             <View style={styles.header}>
                 <Image source={logoImg}/>
-                <TouchableOpacity style={styles.headerAction} onPress={() => alert('Retornar para BuyTicket')}>                    
+                <TouchableOpacity style={styles.headerAction} onPress={() => navigation.navigate('BuyTicket', {ticket})}>                    
                     <Feather name='arrow-left' size={16} color='#FFF' />
                     <Text style={styles.headerActionText}> Retornar</Text>
                 </TouchableOpacity>

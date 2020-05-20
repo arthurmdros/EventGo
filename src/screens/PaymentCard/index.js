@@ -13,6 +13,7 @@ export default function PaymentCard(){
     const route = useRoute();
     const navigation = useNavigation();
     const data = route.params.info;
+    const ticket = data.selectedTicket;
 
     function confirmPaymentCard(data){
         console.log(data);
@@ -22,7 +23,7 @@ export default function PaymentCard(){
         <View style={styles.paymentCardContainer}>
             <View style={styles.header}>
                 <Image source={logoImg} />
-                <TouchableOpacity style={styles.headerAction} onPress={() => alert('Retornar para BuyTicket')}>                    
+                <TouchableOpacity style={styles.headerAction} onPress={() => navigation.navigate('BuyTicket', {ticket})}>                    
                     <Feather name='arrow-left' size={16} color='#FFF' />
                     <Text style={styles.headerActionText}> Retornar</Text>
                 </TouchableOpacity>
