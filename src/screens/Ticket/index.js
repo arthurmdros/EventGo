@@ -27,6 +27,14 @@ export default function Ticket(){
         })
     }, [event_id]);
 
+    function navigateToTicket(ticket){
+        if(ticket.type === 'Gratuito'){
+            navigation.navigate('FreeTicket', {ticket});
+        }else{
+            navigation.navigate('BuyTicket', {ticket});
+        }
+    }
+
     return(
         <View style={styles.ticketContainer}>
             <View style={styles.header}>
@@ -58,7 +66,7 @@ export default function Ticket(){
 
                     <TouchableOpacity
                         style={styles.action}
-                        onPress={()=> navigation.navigate('BuyTicket', {ticket})}
+                        onPress={()=> navigateToTicket(ticket)}
                     >
                         <Text style={styles.actionText}> Adquirir </Text>                       
                     </TouchableOpacity>                        
