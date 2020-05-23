@@ -19,8 +19,17 @@ export default function PaymentCard(){
     
 
     async function confirmPaymentCard(data){
+       
         if(data.mail === undefined){
             alert('Insira um e-mail');
+        }else if(data.numberCard === undefined || data.numberCard.length < 16){
+            alert('Número do cartão deve conter pelo menos que 16 dígitos');
+        }else if(data.holder === undefined){
+            alert('Nome do titular é obrigatório');
+        }else if(data.expirationDate === undefined){
+            alert('Data de validade é obrigatório');
+        }else if(data.code === undefined || data.code.length < 3){
+            alert('Código do cartão possui 3 dígitos');
         }else{
             const name = 'EventGo';
             const email = data.mail;
