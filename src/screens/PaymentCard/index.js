@@ -1,9 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { Form } from '@unform/mobile';
 
+import nodemailer from '../../services/nodemailer';
 import styles from './styles';
 import Input from '../Component/Input';
 import logoImg from '../../assets/logo.png';
@@ -12,11 +13,41 @@ export default function PaymentCard(){
     const formRef = useRef(null);
     const route = useRoute();
     const navigation = useNavigation();
-    const data = route.params.info;
-    const ticket = data.selectedTicket;
 
-    function confirmPaymentCard(data){
-        console.log(data);
+    const dataTicket = route.params.info;
+    const ticket = dataTicket.selectedTicket;
+    
+
+    async function confirmPaymentCard(data){
+        if(data.mail === undefined){
+            alert('Insira um e-mail');
+        }else{
+            const name = 'EventGo';
+            const email = data.mail;
+            const message = `A EventGo agradece a você que utiliza de nossos serviços para ter uma ótima experiências nos eventos que divulgamos. Abaixo encontra-se as informações do seu ingresso adquirido na plataforma. Mais uma vez obrigado! 
+    
+                Ingresso: ${ticket.type}
+                Quantidade: ${dataTicket.amountValue}
+                Valor Total: R$ ${dataTicket.totalValue}
+                Forma de pagamento: ${dataTicket.paymentSelected}
+                Número do cartão: ${data.numberCard}
+                Nome do titular do cartão: ${data.holder}
+                Data de validade: ${data.expirationDate}
+                Código de verificação: ${data.code}
+            `;
+            const info = {
+                name,
+                email,
+                message
+            };
+            try{
+                alert('Informações do ingresso foram enviadas para seu e-mail.');
+                navigation.navigate('Events');
+                await nodemailer.post('/send', info);                
+            }catch(err){
+                alert('Erro ao confirmar pagamento, tente novamente.');                
+            }
+        }
     }
 
     return(
@@ -35,7 +66,7 @@ export default function PaymentCard(){
                     <Input style={styles.inputValue} name='mail' type='text' />                    
                     
                     <Text style={styles.infoProperty}>Forma de pagamento:</Text>
-                    <Text style={styles.infoValue}>{data.paymentSelected}</Text>
+                    <Text style={styles.infoValue}>{dataTicket.paymentSelected}</Text>
 
                     <Text style={styles.infoProperty}>Número do cartão:</Text>
                     <Input style={styles.inputValue}  keyboardType='numeric' name='numberCard' type='numeric' />                   
