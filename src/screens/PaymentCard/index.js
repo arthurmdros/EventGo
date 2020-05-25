@@ -4,6 +4,7 @@ import { useRoute, useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { Form } from '@unform/mobile';
 
+import api from '../../services/api';
 import nodemailer from '../../services/nodemailer';
 import styles from './styles';
 import Input from '../Component/Input';
@@ -49,10 +50,12 @@ export default function PaymentCard(){
                 email,
                 message
             };
-            try{
+            try{                                                   
+                dataTicket.selectedTicket.amount = dataTicket.selectedTicket.amount - dataTicket.amountValue;  
+                await api.put(`ticket/update/${dataTicket.selectedTicket.id}`, dataTicket.selectedTicket);                
+                await nodemailer.post('/send', info);   
                 alert('Informações do ingresso foram enviadas para seu e-mail.');
-                navigation.navigate('Events');
-                await nodemailer.post('/send', info);                
+                navigation.navigate('Events');             
             }catch(err){
                 alert('Erro ao confirmar pagamento, tente novamente.');                
             }
