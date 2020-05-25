@@ -18,6 +18,11 @@ export default function BuyTicket(){
         { label: 'Boleto', value: 'Boleto'},
         { label: 'Cartão de Crédito', value: 'Cartão de Crédito'}
     ]
+    const placeholder = {
+        label: 'Pagar com...',
+        value: null,
+        color: '#9EA0A4',
+    };
 
     function acquired() { 
             const info = {
@@ -87,7 +92,8 @@ export default function BuyTicket(){
                     <Text style={styles.ticketValue}>R$ {totalValue}</Text>
 
                     <Text style={styles.ticketProperty}>Forma de pagamento:</Text>
-                    <PickerSelect      
+                    <PickerSelect 
+                        placeholder={placeholder}     
                         onValueChange={(value) => setPaymentSelected(value)}
                         items={paymentOptions}
                     />
