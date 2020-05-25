@@ -4,6 +4,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { Form } from '@unform/mobile';
 
+import api from '../../services/api';
 import nodemailer from '../../services/nodemailer';
 import Input from '../Component/Input';
 import logoImg from '../../assets/logo.png';
@@ -32,10 +33,12 @@ export default function FreeTicket(){
                 email,
                 message
             };
-            try{
+            try{               
+                dataTicket.amount = dataTicket.amount - 1;                                        
+                await api.put(`ticket/update/${dataTicket.id}`, dataTicket);
+                await nodemailer.push('/send', info);
                 alert('Informações do ingresso foram enviadas para seu e-mail.');
-                navigation.navigate('Events');
-                await nodemailer.post('/send', info);                
+                navigation.navigate('Events');                              
             }catch(err){
                 alert('Erro ao confirmar aquisição de ingresso, tente novamente.');                
             }
