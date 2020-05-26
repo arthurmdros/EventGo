@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { TouchableOpacity, Image, View, Text } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { Feather } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import { Form } from '@unform/mobile';
 
 import api from '../../services/api';
@@ -22,37 +22,44 @@ export default function FreeTicket(){
     Quantidade: 1
     Valor Total: R$ ${dataTicket.value}`;
 
-    async function confirmTicket(data){
+    async function confirmTicket(data){       
         if(data.mail ===  undefined){
             alert('Insira um e-mail');
         }else{
-            const name = 'EventGo';
-            const email = data.mail;
-            const info = {
-                name,
-                email,
-                message
-            };
-            try{               
+            try{        
                 dataTicket.amount = dataTicket.amount - 1;                                        
-                await api.put(`ticket/update/${dataTicket.id}`, dataTicket);
-                await nodemailer.push('/send', info);
-                alert('Informações do ingresso foram enviadas para seu e-mail.');
-                navigation.navigate('Events');                              
+                await api.put(`ticket/update/${dataTicket.id}`, dataTicket); 
+                sendNoReply(data.mail);
             }catch(err){
-                alert('Erro ao confirmar aquisição de ingresso, tente novamente.');                
-            }
-            
+                alert('Erro ao confirmar pagamento, tente novamente.');               
+            }            
         }
+    }
+
+    async function sendNoReply(mail){
+        const name = 'EventGo';
+        const email = mail;
+        const info = {
+            name,
+            email,
+            message
+        };
+        try{                                   
+            alert('Informações do ingresso foram enviadas para seu e-mail.');                                          
+            navigation.navigate('Events'); 
+            await nodemailer.post('/send', info);                   
+        }catch(err){
+            alert('Erro ao confirmar pagamento, tente novamente.');                
+        }         
     }
 
     return(
         <View style={styles.freeTicketContainer}>
             <View style={styles.header}>
                 <Image source={logoImg}/>
-                <TouchableOpacity style={styles.headerAction} onPress={() => navigation.navigate('Ticket')}>                    
-                    <Feather name='arrow-left' size={16} color='#FFF' />
-                    <Text style={styles.headerActionText}> Retornar</Text>
+                <TouchableOpacity style={styles.headerAction} onPress={() => navigation.navigate('Events')}>                    
+                    <Text style={styles.headerActionText}>Cancelar</Text>
+                    <MaterialIcons name="cancel" size={16} color="#FFF" />
                 </TouchableOpacity>
             </View>
 
