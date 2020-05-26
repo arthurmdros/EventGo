@@ -32,34 +32,43 @@ export default function PaymentCard(){
         }else if(data.code === undefined || data.code.length < 3){
             alert('Código do cartão possui 3 dígitos');
         }else{
-            const name = 'EventGo';
-            const email = data.mail;
-            const message = `A EventGo agradece a você que utiliza de nossos serviços para ter uma ótima experiências nos eventos que divulgamos. Abaixo encontra-se as informações do seu ingresso adquirido na plataforma. Mais uma vez obrigado! 
-    
-                Ingresso: ${ticket.type}
-                Quantidade: ${dataTicket.amountValue}
-                Valor Total: R$ ${dataTicket.totalValue}
-                Forma de pagamento: ${dataTicket.paymentSelected}
-                Número do cartão: ${data.numberCard}
-                Nome do titular do cartão: ${data.holder}
-                Data de validade: ${data.expirationDate}
-                Código de verificação: ${data.code}
-            `;
-            const info = {
-                name,
-                email,
-                message
-            };
-            try{                                                   
+            try{
                 dataTicket.selectedTicket.amount = dataTicket.selectedTicket.amount - dataTicket.amountValue;  
-                await api.put(`ticket/update/${dataTicket.selectedTicket.id}`, dataTicket.selectedTicket);                
-                await nodemailer.post('/send', info);   
-                alert('Informações do ingresso foram enviadas para seu e-mail.');
-                navigation.navigate('Events');             
+                await api.put(`ticket/update/${dataTicket.selectedTicket.id}`, dataTicket.selectedTicket);    
+                sendNoReply(data);
             }catch(err){
                 alert('Erro ao confirmar pagamento, tente novamente.');                
             }
         }
+    }
+
+    async function sendNoReply(data){
+        const name = 'EventGo';
+        const email = data.mail;
+        const message = `A EventGo agradece a você que utiliza de nossos serviços para ter uma ótima experiências nos eventos que divulgamos. Abaixo encontra-se as informações do seu ingresso adquirido na plataforma. Mais uma vez obrigado! 
+
+            Ingresso: ${ticket.type}
+            Quantidade: ${dataTicket.amountValue}
+            Valor Total: R$ ${dataTicket.totalValue}
+            Forma de pagamento: ${dataTicket.paymentSelected}
+            Número do cartão: ${data.numberCard}
+            Nome do titular do cartão: ${data.holder}
+            Data de validade: ${data.expirationDate}
+            Código de verificação: ${data.code}
+        `;
+        const info = {
+            name,
+            email,
+            message
+        };
+        try{                                                   
+            alert('Informações do ingresso foram enviadas para seu e-mail.'); 
+            navigation.navigate('Events');                           
+            await nodemailer.post('/send', info);                  
+        }catch(err){
+            alert('Erro ao confirmar pagamento, tente novamente.');                
+        }  
+        
     }
 
     return(
