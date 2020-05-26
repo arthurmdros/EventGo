@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import {FlatList, View, Image, Text, TouchableOpacity} from 'react-native';
+import * as MailComposer from 'expo-mail-composer';
 
 import logoImg from '../../assets/logo.png';
 import api from '../../services/api';
@@ -14,7 +15,7 @@ export default function Events(){
     const [events, setEvents] = useState([]);
     const [page, setPage] = useState(1);
     const [total, setTotal] = useState(0);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);   
 
     async function loadEvents(){
         if(loading){
@@ -41,10 +42,24 @@ export default function Events(){
         loadEvents();
     }, []);
 
+    function sendEvaluation(){
+        const email = "eventgocorp@gmail.com"
+        const message = 'Nos dê sua opinião sobre o app...'
+        MailComposer.composeAsync({
+            subject: 'Avaliação do usuário',
+            recipients: [email],
+            body: message,
+        })
+    }
+
     return(
         <View style={styles.eventsContainer}>
             <View style={styles.header}>
                 <Image source={logoImg}/>
+                <TouchableOpacity style={styles.evaluationButton} onPress={sendEvaluation}>
+                    <Text style={styles.headerText}>Sua sugestão</Text>
+                    <Feather name='mail' size={20} color={'#FFF'}/>
+                </TouchableOpacity>                
             </View>
 
             <Text style={styles.title}>Bem-Vindo ao EventGo</Text>
