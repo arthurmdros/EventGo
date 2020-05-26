@@ -18,6 +18,7 @@ export default StyleSheet.create({
     headerText: {
         fontSize: 15,
         color: '#FFF',
+        marginRight: 10,
     },
 
     headerTextBold: {
@@ -72,5 +73,11 @@ export default StyleSheet.create({
         color: '#1393f6',
         fontSize: 15,
         fontWeight: 'bold',
+    },
+
+    evaluationButton: {
+        flexDirection: 'row',                
+        alignItems: 'center',
+        marginTop: 20,        
     },
 })
