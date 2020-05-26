@@ -28,24 +28,33 @@ export default function Payment(){
         if(data.mail ===  undefined){
             alert('Insira um e-mail');
         }else{
-            const name = 'EventGo';
-            const email = data.mail;
-            const info = {
-                name,
-                email,
-                message
-            };
-            try{                                                   
+            try{ 
                 dataTicket.selectedTicket.amount = dataTicket.selectedTicket.amount - dataTicket.amountValue;  
-                await api.put(`ticket/update/${dataTicket.selectedTicket.id}`, dataTicket.selectedTicket);                
-                await nodemailer.post('/send', info);   
-                alert('Informações do ingresso foram enviadas para seu e-mail.');
-                navigation.navigate('Events');             
+                await api.put(`ticket/update/${dataTicket.selectedTicket.id}`, dataTicket.selectedTicket);     
+                sendNoReply(data.mail);
             }catch(err){
-                alert('Erro ao confirmar pagamento, tente novamente.');                
+                alert('Erro ao confirmar pagamento, tente novamente.');  
             }
             
         }
+    }
+
+    async function sendNoReply(mail){    
+        const name = 'EventGo';
+        const email = mail;
+        const info = {
+            name,
+            email,
+            message
+        };
+        try{                                                                  
+            alert('Informações do ingresso foram enviadas para seu e-mail.'); 
+            navigation.navigate('Events'); 
+            await nodemailer.post('/send', info);             
+        }catch(err){
+            alert('Erro ao confirmar pagamento, tente novamente.');                
+        } 
+       
     }
 
     return(
