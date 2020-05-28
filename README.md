@@ -75,15 +75,11 @@ escolher a quantidade desejada.
 </p>
 
 ## Execução
+
+  Executando back-end:
+  - [Realizar git clone do repositório](https://github.com/arthurmdros/EventManager)
   
 <dl>
-  <dt>Executando back-end:</dt>
-  <dd>1. Abrir prompt de comando</dd>
-  <dd>2. Acesse o diretório do projeto pelo prompt</dd>
-  <dd>3. Acesse a pasta backend</dd>
-  <dd>4. Execute o seguinte comando: npm start</dd>
-
-
   <dt>Executando front-end:</dt>
   <dd>1. Abrir prompt de comando</dd>
   <dd>2. Acesse o diretório do projeto pelo prompt</dd>
